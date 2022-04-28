@@ -1,0 +1,66 @@
+# yml的格式要求：值的左边必须要有空格
+server:
+  port: 8080
+
+
+spring:
+  #配置mysql数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/phonebook?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234
+    #配置参数
+    druid:
+      #初始化连接数
+      initial-size: 1
+      #最小空闲连接
+      min-idle: 1
+      #最大活动连接
+      max-active: 20
+      #获取连接时测试是否可用
+      test-on-borrow: true
+      #监控页面启动
+      filter:
+        wall:
+          config:
+            start-transaction-allow: true
+    #修改资源路径
+    resources:
+    #static-locations: classpath:/statics/
+
+  #设置图片上传大小不超过多少
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+  #自定义模板引擎的路径设置
+  thymeleaf:
+    #不写使用默认的templates
+    # prefix: classpath:/page/
+    #关闭thymeleaf的缓存
+    cache: false
+
+
+#springboot集成Mybatis环境
+mybatis:
+  #包扫描别名
+  type-aliases-package: com.wh.demo.entity
+  #日志打印
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #扫描mapper映射文件
+  mapper-locations: classpath:mapper/*.xml
+
+#打印sql代码 mybatis-plus
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#配置pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
